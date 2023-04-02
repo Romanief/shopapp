@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind utilities;
 @tailwind components;
+
+.myDark {
+  background-color: black;
+  color: #d1d5db;
+}

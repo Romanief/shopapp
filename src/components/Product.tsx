@@ -12,8 +12,8 @@ function Product({ product }: { product: productType }) {
   const { cart, addToCart, removeFromCart } = useContext(cartContext)
 
   return (
-    <div className="my-3 h-96 flex flex-col rounded-3xl p-10">
-      <span className="text-3xl mb-10 border-b pb-3 border-cyan-700">
+    <div className="my-10 h-96 flex flex-col rounded-3xl">
+      <span className="text-3xl mb-10 border-b pb-3 border-main">
         {product.title}
       </span>
       <div className="flex h-3/4 justify-between">
@@ -22,11 +22,13 @@ function Product({ product }: { product: productType }) {
         </div>
         <div className="w-1/2 ml-10 flex flex-col justify-between">
           <div>
-            <div>{product.description}</div>
+            <div className={product.description.length > 100 ? "text-sm" : ""}>
+              {product.description}
+            </div>
             <div className="my-3 font-bold">{product.price} $</div>
           </div>
           <div className="flex">
-            <div className="flex text-xl mt-1">
+            <div className="flex text-xl mt-1 text-main">
               {[...new Array(Math.floor(product.rating.rate)).fill(0)].map(
                 (a) => (
                   <AiFillStar />
@@ -41,17 +43,17 @@ function Product({ product }: { product: productType }) {
             <div className="mx-2">({product.rating.count})</div>
           </div>
         </div>
-        {cart.filter((x) => x.id == product.id).length == 0 ? (
+        {cart.filter((x) => x.item.id == product.id).length == 0 ? (
           <div
             onClick={() => addToCart(product)}
-            className="text-5xl hover:underline cursor-pointer"
+            className="text-5xl hover:underline cursor-pointer text-main"
           >
             <MdOutlineAddShoppingCart />
           </div>
         ) : (
           <div
             onClick={() => removeFromCart(product)}
-            className="text-5xl hover:underline cursor-pointer"
+            className="text-5xl hover:underline cursor-pointer text-main"
           >
             <MdOutlineRemoveShoppingCart />
           </div>

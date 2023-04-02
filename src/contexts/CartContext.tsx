@@ -1,7 +1,6 @@
 import React, { createContext, useState } from "react"
 
 import { cartItem, product } from "@/types/type"
-import { Z_ASCII } from "zlib"
 
 type contextType<T = Array<cartItem>> = {
   cart: T
@@ -21,7 +20,7 @@ export default function CartContext({
 
   const addToCart = (x: product) => {
     const newCartItem: cartItem = {
-      id: x.id,
+      item: x,
       quantity: 1,
     }
 
@@ -32,8 +31,8 @@ export default function CartContext({
   }
 
   const removeFromCart = (x: product) => {
-    if (cart.filter((i) => i.id == x.id)) {
-      const newCart = [...cart].filter((i) => i.id != x.id)
+    if (cart.filter((i) => i.item.id == x.id)) {
+      const newCart = [...cart].filter((i) => i.item.id != x.id)
       setCart(newCart)
     } else {
       console.log("item not in cart")
